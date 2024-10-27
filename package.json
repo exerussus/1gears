@@ -1,0 +1,26 @@
+{
+  "name": "com.exerussus.1gears",
+  "version": "1.0.0",
+  "displayName": "1Gears",
+  "description": "Набор компонентов с базовыми механиками на ECS. *** НАХОДИТСЯ В РАННЕЙ СТАДИИ РАЗРАБОТКИ ***",
+  "unity": "2020.3",
+  "dependencies": {},
+  "keywords": [
+    "leoecslite",
+    "leoecs",
+    "ecs",
+    "performance",
+    "1extensions",
+    "1easyecs",
+    "1gears",
+    "exerussus"
+  ],
+  "author": {
+    "name": "Exerussus",
+    "email": "solovyov.production@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/exerussus/1gears.git"
+  }
+}
