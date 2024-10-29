@@ -16,8 +16,8 @@ namespace Exerussus._1Gears.Core
         protected override Signal Signal => _signal;
         private Signal _signal = new();
         private static GearsCore _instance;
-
-        public GearsPooler Pooler { get; private set; }
+        private GearsPooler _pooler;
+        public static GearsPooler Pooler => Instance._pooler;
         
         public static GearsCore Instance
         {
@@ -55,7 +55,7 @@ namespace Exerussus._1Gears.Core
 
         protected override void SetSharingDataBeforePreInitialized(EcsWorld world, GameShare gameShare)
         {
-            Pooler = gameShare.GetSharedObject<GearsPooler>();
+            _pooler = gameShare.GetSharedObject<GearsPooler>();
         }
     }
 }

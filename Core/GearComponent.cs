@@ -9,7 +9,9 @@ namespace Exerussus._1Gears.Core
     public abstract class GearComponent : MonoBehaviour
     {
         [SerializeField, HideInInspector] protected GearObject gearObject;
+        public EcsPackedEntity EntityPack => gearObject.EntityPack;
         public bool isActivated { get; private set; }
+        public bool IsQuitting => gearObject.IsQuitting;
         
         private void Awake()
         {
@@ -18,12 +20,14 @@ namespace Exerussus._1Gears.Core
             if (gearObject == null)
             {
                 gearObject = gameObject.AddComponent<GearObject>();
+                gearObject.GearComponents.Add(this);
                 gearObject.OnEnable();
             }
             else
             {
                 if (!gearObject.Activated) return;
                 if (!gearObject.EntityPack.Unpack(gearObject.GearsPooler.World, out var entity)) return;
+                gearObject.GearComponents.Add(this);
                 InvokeOnActivate(entity, gearObject.GearsPooler);
             }
         }

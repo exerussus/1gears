@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Exerussus._1Gears.Features.Scaler
 {
-    public class ScaleSystem : EasySystem<GearsPooler>
+    public class ScaleSystem : EcsSignalListener<GearsPooler, GearSignals.OnGearStartHighlight, GearSignals.OnGearEndHighlight>
     {
         private EcsFilter _scaleFilter;
 
@@ -22,27 +22,44 @@ namespace Exerussus._1Gears.Features.Scaler
         private void OnScaleUpdate(int entity)
         {
             ref var scaleData = ref Pooler.Scale.Get(entity);
+            if (scaleData.Value.onHighlightOnly && !Pooler.HighlightedMark.Has(entity))
+            {
+                if (Pooler.InScaleProcessMark.Has(entity))
+                {
+                    scaleData.Value.transform.localScale = scaleData.OriginalScale;
+                    scaleData.Timer = 0;
+                    scaleData.IsExpanding = true;
+                    Pooler.InScaleProcessMark.Del(entity);
+                }
+                return;
+            }
 
-            // Понизить до нуля и увеличить таймер на текущий шаг
+            Pooler.InScaleProcessMark.AddOrGet(entity);
             scaleData.Timer = Mathf.Max(0, scaleData.Timer + DeltaTime);
     
-            // Кэшировать часто используемые значения
             var scaleDiff = scaleData.Value.scaleDifference;
             var duration = scaleData.Value.duration;
     
-            // Если достигли конца цикла, уменьшаем таймер, чтобы сбросить цикл
             if (scaleData.Timer >= duration) 
             {
                 scaleData.Timer -= duration;
             }
-
-            // Рассчитать текущий масштаб с минимальными операциями
-            float normalizedTime = scaleData.Timer / duration;
-            float oscillation = Mathf.Sin(normalizedTime * Mathf.PI * 2) * 0.5f + 0.5f;  // Normalize to [0, 1]
+            
+            var normalizedTime = scaleData.Timer / duration;
+            var oscillation = Mathf.Sin(normalizedTime * Mathf.PI * 2) * 0.5f + 0.5f;
             var targetScale = scaleData.OriginalScale + new Vector3(scaleDiff.x, scaleDiff.y, 0);
     
-            // Сразу установить новый масштаб
             scaleData.Value.transform.localScale = Vector3.Lerp(scaleData.OriginalScale, targetScale, oscillation);
+        }
+
+        protected override void OnSignal(GearSignals.OnGearStartHighlight data)
+        {
+            
+        }
+
+        protected override void OnSignal(GearSignals.OnGearEndHighlight data)
+        {
+            
         }
     }
 }

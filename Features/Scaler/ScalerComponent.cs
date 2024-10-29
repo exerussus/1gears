@@ -1,6 +1,5 @@
 ﻿using Exerussus._1Gears.Core;
 using Exerussus._1Gears.Custom;
-using Leopotam.EcsLite;
 using UnityEngine;
 
 namespace Exerussus._1Gears.Features.Scaler
@@ -10,6 +9,7 @@ namespace Exerussus._1Gears.Features.Scaler
     {
         public Vector2 scaleDifference = new Vector2(0.2f, 0.2f);
         public float duration = 2f;
+        public bool onHighlightOnly;
         
         protected override void OnActivate(int entity, GearsPooler pooler)
         {

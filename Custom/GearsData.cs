@@ -51,5 +51,25 @@ namespace Exerussus._1Gears.Custom
             public Vector3 OriginalScale;
             public bool IsExpanding;
         }
+
+        public struct InScaleProcessMark : IEcsComponent
+        {
+            
+        }
+
+        public struct InColorizeProcessMark : IEcsComponent
+        {
+            
+        }
+        
+        public struct Highlighter : IEcsComponent
+        {
+            
+        }
+        
+        public struct HighlightedMark : IEcsComponent
+        {
+            
+        }
     }
 }

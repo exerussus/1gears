@@ -18,7 +18,8 @@ namespace Exerussus._1Gears.Core
         public GearsPooler GearsPooler => _gearsPooler;
         public EcsPackedEntity EntityPack => _entityPack;
         public bool Activated => _isActivated;
-
+        public bool IsQuitting { get; private set; }
+        
         public void Start()
         {
             OnEnable();
@@ -28,7 +29,8 @@ namespace Exerussus._1Gears.Core
         {
             if (_isActivated) return;
             if (!Application.isPlaying) return;
-            _gearsPooler = GearsCore.Instance.Pooler;
+            Application.quitting += SetQuitting;
+            _gearsPooler = GearsCore.Pooler;
             if (gearComponents is not {Count: > 0})
             {
                 gearComponents = new List<GearComponent>(GetComponents<GearComponent>());
@@ -46,6 +48,7 @@ namespace Exerussus._1Gears.Core
 
         public void OnDisable()
         {
+            if (IsQuitting) return;
             if (_isActivated)
             {
                 foreach (var gearComponent in gearComponents)
@@ -63,6 +66,11 @@ namespace Exerussus._1Gears.Core
             if (_isActivated && _entityPack.Unpack(_gearsPooler.World, out var entity)) OnDisable();
         }
 
+        private void SetQuitting()
+        {
+            IsQuitting = true;
+        }
+        
         public void OnValidate()
         {
             gearComponents = GetComponents<GearComponent>().ToList();

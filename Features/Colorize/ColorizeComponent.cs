@@ -12,6 +12,7 @@ namespace Exerussus._1Gears.Features.Colorize
         public Color targetColor = Color.white;
         public Image image;
         public SpriteRenderer spriteRenderer;
+        public bool onHighlightOnly;
 
         protected override void OnActivate(int entity, GearsPooler pooler)
         {

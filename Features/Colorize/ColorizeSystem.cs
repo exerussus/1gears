@@ -27,6 +27,19 @@ namespace Exerussus._1Gears.Systems
         {
             ref var colorizeData = ref Pooler.ColorizeImage.Get(entity);
             
+            if (colorizeData.Value.onHighlightOnly && !Pooler.HighlightedMark.Has(entity))
+            {
+                if (Pooler.InColorizeProcess.Has(entity))
+                {
+                    colorizeData.AnimatingToTarget = true;
+                    colorizeData.Value.image.color = colorizeData.OriginalColor;
+                    colorizeData.ElapsedTime = 0f;
+                    Pooler.InColorizeProcess.Del(entity);
+                }
+                return;
+            }
+
+            Pooler.InColorizeProcess.AddOrGet(entity);
             colorizeData.ElapsedTime += DeltaTime;
 
             var t = Mathf.PingPong(colorizeData.ElapsedTime / colorizeData.Value.duration, 1f);
@@ -47,6 +60,18 @@ namespace Exerussus._1Gears.Systems
         private void OnUpdateSpriteColorize(int entity)
         {
             ref var colorizeData = ref Pooler.ColorizeSprite.Get(entity);
+            
+            if (colorizeData.Value.onHighlightOnly && !Pooler.HighlightedMark.Has(entity))
+            {
+                if (Pooler.InScaleProcessMark.Has(entity))
+                {
+                    colorizeData.AnimatingToTarget = true;
+                    colorizeData.Value.spriteRenderer.color = colorizeData.OriginalColor;
+                    colorizeData.ElapsedTime = 0f;
+                    Pooler.InScaleProcessMark.Del(entity);
+                }
+                return;
+            }
             
             colorizeData.ElapsedTime += DeltaTime;
 
