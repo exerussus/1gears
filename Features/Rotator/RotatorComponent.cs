@@ -9,6 +9,7 @@ namespace Exerussus._1Gears.Features.Rotater
     public class RotatorComponent : GearComponent
     {
         public Vector3 speed = new Vector3(0, 0, 10);
+        public bool onHighlightOnly;
         
         protected override void OnActivate(int entity, GearsPooler pooler)
         {

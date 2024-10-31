@@ -61,6 +61,11 @@ namespace Exerussus._1Gears.Custom
         {
             
         }
+
+        public struct InRotationProcessMark : IEcsComponent
+        {
+            
+        }
         
         public struct Highlighter : IEcsComponent
         {

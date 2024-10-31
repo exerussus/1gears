@@ -13,6 +13,7 @@ namespace Exerussus._1Gears.Custom
             ColorizeImage = new(world);
             GearObject = new(world);
             Rotator = new(world);
+            InRotationProcessMark = new(world);
             Scale = new(world);
             Highlighter = new(world);
             HighlightedMark = new(world);
@@ -26,6 +27,7 @@ namespace Exerussus._1Gears.Custom
         public PoolerModule<GearsData.ColorizeSprite> ColorizeSprite { get; private set; }
         public PoolerModule<GearsData.GearObject> GearObject { get; private set; }
         public PoolerModule<GearsData.Rotator> Rotator { get; private set; }
+        public PoolerModule<GearsData.InRotationProcessMark> InRotationProcessMark { get; private set; }
         public PoolerModule<GearsData.Scale> Scale { get; private set; }
         public PoolerModule<GearsData.Highlighter> Highlighter { get; private set; }
         public PoolerModule<GearsData.HighlightedMark> HighlightedMark { get; private set; }
