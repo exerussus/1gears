@@ -1,6 +1,6 @@
 {
   "name": "com.exerussus.1gears",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "displayName": "1Gears",
   "description": "Набор компонентов с базовыми механиками на ECS. *** НАХОДИТСЯ В РАННЕЙ СТАДИИ РАЗРАБОТКИ ***",
   "unity": "2020.3",
