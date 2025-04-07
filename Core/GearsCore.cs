@@ -12,9 +12,7 @@ namespace Exerussus._1Gears.Core
     public class GearsCore : EcsStarter
     {
         [SerializeField] private GameContext gameContext = new();
-        protected override Func<float> FixedUpdateDelta { get; } = () => Time.fixedDeltaTime;
-        protected override Func<float> UpdateDelta { get; } = () => Time.deltaTime; 
-        protected override Signal Signal => _signal;
+        public override Signal Signal => _signal;
         private Signal _signal = new();
         private static GearsCore _instance;
         private GearsPooler _pooler;
