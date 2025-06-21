@@ -39,7 +39,7 @@ namespace Exerussus._1Gears.Core
 
         protected override GameContext GetGameContext(GameShare gameShare) => gameContext;
 
-        protected override EcsGroup[] GetGroups()
+        protected override EcsGroup[] CreateGroups()
         {
             return new EcsGroup[]
             {
